@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    
+{% endblock %}
+
+{% block nav %}
+    <a class="navBtn active" href="{% url 'index' %}">Gallery</a>
+    <a class="navBtn" href="">Communtiy</a>
+
+    <div id="map">
+        <button class="mapBnt"></button>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <main>
+        {% for artwork in artworks %}
+            <section class="artwork">
+                <img src="{{ artwork.image.url }}" alt="{{ artwork.title }} by {{ artwork.artist }}">
+                <h3>{{ artwork.title }}</h3>
+                <p>{{ artwork.artist }}</p>
+            </section>
+        {% endfor %}
+    </main>
+
+    <aside>
+        <h2>Interpitations</h2>
+        <div class="asideCon"></div>
+
+        <h2>Comments</h2>
+        <div class="asideCon"></div>
+    </aside>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "gallery/base.html" %}
+{% block title %}Upload artwork{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="mb-4">Upload artwork</h1>
+
+  <form method="post" enctype="multipart/form-data" class="card p-4 shadow-sm">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-3">
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+          <div class="form-text">{{ field.help_text }}</div>
+        {% endif %}
+        {% if field.errors %}
+          <div class="text-danger small">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">
+      {% if view.object %}
+          Update
+      {% else %}
+          Save
+      {% endif %}
+    </button>
+  </form>
+</div>
+{% endblock %}

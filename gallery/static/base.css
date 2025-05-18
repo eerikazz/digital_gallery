@@ -1,0 +1,124 @@
+@import url('satoshi.css');
+
+:root {
+    --bg: #FAFAFA;
+    --text: #000;
+    --primary: #0080FF;
+    --secondary: #E6E6E6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    text-decoration: none;
+    font-family: Satoshi-Variable;
+}
+
+body {
+    height: 100lvh;
+
+    display: grid;
+    grid-template-columns: minmax(max-content, 320px) minmax(512px, 1024px) minmax(max-content, 320px);
+    justify-content: space-between;
+    gap: 24px;
+}
+
+header {
+    grid-column: 1;
+
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+nav {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.navBtn {
+    padding: 16px 24px;
+    border-radius: 16px;
+    color: var(--text);
+}
+
+.active {
+    background-color: #fff;
+    border: 1px solid var(--secondary);
+    box-shadow: 0px 0px 12px #00000010;
+}
+
+#map {
+    height: 100%;
+    margin-top: 18px;
+
+    border-radius: 16px;
+    border: 1px solid var(--secondary);
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    place-items: center;
+}
+
+.mapBnt {
+    width: 24px;
+    height: 24px;
+    padding: 6px;
+
+    border-radius: 100%;
+    outline: 1px solid var(--secondary);
+    border: 6px solid var(--bg);
+
+    background-color: var(--primary);
+}
+
+main {
+    grid-column: 2;
+
+    height: 100%;
+
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-snap-align: center;
+
+    height: 100lvh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+section img {
+    max-height: 64%;
+}
+
+aside {
+    grid-column: 3;
+
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.asideCon {
+    flex: 1;
+
+    border-radius: 16px;
+    border: 1px solid var(--secondary);
+}

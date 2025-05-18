@@ -1,0 +1,88 @@
+{% extends "gallery/base.html" %}
+{% block title %}{{ artwork.title }} | Gallery{% endblock %}
+
+{% block content %}
+<div class="container">
+  <!-- ------ Original / Interpretation displayed ------------------------ -->
+  <div class="row mb-5">
+    <div class="col-lg-6">
+      <img src="{{ artwork.image.url }}" class="img-fluid rounded shadow" alt="{{ artwork.title }}">
+    </div>
+    <div class="col-lg-6">
+      <h1>{{ artwork.title }}</h1>
+      {% if not artwork.is_original %}
+        <p class="fst-italic">Interpretation of: 
+          <a href="{% url 'gallery:artwork_detail' artwork.parent.pk %}">
+            {{ artwork.parent.title }}
+          </a>
+        </p>
+      {% endif %}
+      <p>{{ artwork.description|linebreaks }}</p>
+      <p class="text-muted small">Uploaded by {{ artwork.uploaded_by }} on {{ artwork.uploaded_at|date:"F j, Y" }}</p>
+
+      {% if user.is_authenticated and artwork.is_original %}
+        <a class="btn btn-primary"
+           href="{% url 'gallery:interpretation_add' artwork.pk %}">
+           Upload your interpretation
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- ------ Interpretations -------------------------------------------- -->
+  {% if artwork.is_original %}
+    <h2 class="h4 mb-3">Interpretations ({{ interpretations.count }})</h2>
+    {% if interpretations %}
+      <div class="row g-4 mb-5">
+        {% for interp in interpretations %}
+          <div class="col-6 col-md-4 col-lg-3">
+            <a href="{% url 'gallery:artwork_detail' interp.pk %}" class="text-decoration-none">
+              <div class="card h-100 shadow-sm">
+                <img src="{{ interp.image.url }}" class="card-img-top" alt="{{ interp.title }}">
+                <div class="card-body p-2">
+                  <h6 class="card-title text-center mb-0">{{ interp.title }}</h6>
+                </div>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="mb-5 text-muted">No interpretations yet.</p>
+    {% endif %}
+  {% endif %}
+
+  <!-- ------ Comments ---------------------------------------------------- -->
+  <div class="row">
+    <div class="col-lg-8">
+      <h2 class="h4 mb-3">Comments ({{ approved_comments|length }})</h2>
+
+      {% for c in approved_comments %}
+        <div class="mb-4">
+          <strong>{{ c.name }}</strong>
+          <span class="text-muted small">– {{ c.created_at|date:"F j, Y" }}</span>
+          <p class="mb-0">{{ c.text|linebreaks }}</p>
+        </div>
+      {% empty %}
+        <p class="text-muted">No comments yet.</p>
+      {% endfor %}
+    </div>
+
+    <!-- ------ Comment form -------------------------------------------- -->
+    <div class="col-lg-4">
+      <h2 class="h5 mb-3">Leave a comment</h2>
+      <form method="post">
+        {% csrf_token %}
+        {% for field in comment_form %}
+          <div class="mb-3">
+            {{ field.label_tag }} {{ field }}
+            {% if field.errors %}<div class="text-danger small">{{ field.errors }}</div>{% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-outline-primary">Send</button>
+        <p class="small mt-2 text-muted">Your comment will appear after staff approval.</p>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

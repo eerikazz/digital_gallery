@@ -1,0 +1,21 @@
+{% extends "gallery/base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 400px">
+  <h1 class="h3 mb-4 text-center">Log in</h1>
+  <form method="post" class="card p-4 shadow-sm">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="mb-3">
+      {{ form.username.label_tag }} {{ form.username }}
+    </div>
+    <div class="mb-3">
+      {{ form.password.label_tag }} {{ form.password }}
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Log in</button>
+  </form>
+  <p class="mt-3 text-center small">
+    No account? <a href="{% url 'accounts:register' %}">Sign up →</a>
+  </p>
+</div>
+{% endblock %}
