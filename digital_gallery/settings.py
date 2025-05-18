@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure--npg$wo*h(b_dd85lx+-bbe=^((^9cfb1%@00uyx^ez@(i8@^j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "digital-gallery-9caxz.ondigitalocean.app",
+    "localhost",          # keep local runserver happy
+    "127.0.0.1",
+]
 
 
 # Application definition
