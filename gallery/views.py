@@ -16,11 +16,13 @@ from django.views.generic.edit import FormMixin
 from .forms import ArtworkForm, CommentForm
 from .models import Artwork, Comment
 
+from django.views.decorators.clickjacking import xframe_options_exempt
+
 
 # ---------------------------------------------------------------------------
 #  LIST + DETAIL
 # ---------------------------------------------------------------------------
-
+@xframe_options_exempt
 class ArtworkListView(ListView):
     """
     Shows only approved originals.

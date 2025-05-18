@@ -46,7 +46,18 @@ INSTALLED_APPS = [
     'management',
     'gallery',
     'accounts',
+    "csp"
 ]
+
+# leave X-Frame-Options at SAMEORIGIN (or even DENY)
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
+# tell browsers which parents are allowed
+CSP_FRAME_ANCESTORS = (
+    "'self'",                 # you can still embed your own pages if needed
+    "https://gather.town",
+    "https://app.gather.town",  # the in-world iframe host
+)
 
 # Where to send users after login/logout
 LOGIN_REDIRECT_URL = "gallery:artwork_list"
