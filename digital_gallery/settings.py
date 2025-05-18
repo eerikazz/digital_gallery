@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 
 # leave X-Frame-Options at SAMEORIGIN (or even DENY)
-X_FRAME_OPTIONS = "SAMEORIGIN"
+X_FRAME_OPTIONS = "ALLOWALL"
 
 # tell browsers which parents are allowed
 CSP_FRAME_ANCESTORS = (
