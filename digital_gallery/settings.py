@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure--npg$wo*h(b_dd85lx+-bbe=^((^9cfb1%@00uyx^ez@(i8@^j
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "gallery.byerikas.com",
     "digital-gallery-9caxz.ondigitalocean.app",
     "localhost",          # keep local runserver happy
     "127.0.0.1",
