@@ -63,8 +63,8 @@ class ArtworkDetailView(FormMixin, DetailView):
 
             if request.user.is_authenticated:
                 # Auto-fill the model
-                comment.user  = request.user
-                comment.name = request.user.get_full_name()
+                comment.user = request.user
+                comment.name  = request.user.get_full_name() or request.user.username
                 comment.email = request.user.email
 
             comment.save()
@@ -100,19 +100,19 @@ class ArtworkDetailView(FormMixin, DetailView):
     # -------------------------------
     #  Accept a new visitor comment
     # -------------------------------
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()          # DetailView requirement
-        form = self.get_form()
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.artwork = self.object
-            comment.is_approved = False          # moderation
-            comment.save()
-            messages.success(
-                request, "Thanks! Your comment is waiting for staff approval."
-            )
-            return redirect(self.get_success_url())
-        return self.form_invalid(form)
+    # def post(self, request, *args, **kwargs):
+    #     self.object = self.get_object()          # DetailView requirement
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         comment = form.save(commit=False)
+    #         comment.artwork = self.object
+    #         comment.is_approved = False          # moderation
+    #         comment.save()
+    #         messages.success(
+    #             request, "Thanks! Your comment is waiting for staff approval."
+    #         )
+    #         return redirect(self.get_success_url())
+    #     return self.form_invalid(form)
 
 
 # ---------------------------------------------------------------------------
