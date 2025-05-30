@@ -46,18 +46,7 @@ INSTALLED_APPS = [
     'management',
     'gallery',
     'accounts',
-    "csp"
 ]
-
-# leave X-Frame-Options at SAMEORIGIN (or even DENY)
-X_FRAME_OPTIONS = "ALLOWALL"
-
-# tell browsers which parents are allowed
-CSP_FRAME_ANCESTORS = (
-    "'self'",                 # you can still embed your own pages if needed
-    "https://gather.town",
-    "https://app.gather.town",  # the in-world iframe host
-)
 
 # Where to send users after login/logout
 LOGIN_REDIRECT_URL = "gallery:artwork_list"
@@ -73,18 +62,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# allow sending cookies in a third-party context
-CSRF_COOKIE_SAMESITE   = 'None'
-CSRF_COOKIE_SECURE     = True
-
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE   = True
-
-CSRF_TRUSTED_ORIGINS = [
-    "'self'",                 # you can still embed your own pages if needed
-    "https://gather.town",
-    "https://app.gather.town",
-]
 
 ROOT_URLCONF = 'digital_gallery.urls'
 
